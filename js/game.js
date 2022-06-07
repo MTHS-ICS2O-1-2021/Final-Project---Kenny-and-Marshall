@@ -26,6 +26,5 @@ const config = {
   },
 }
 
-
-const game = new Phaser.Game(config);
-console.log(game);
+const game = new Phaser.Game(config)
+console.log(game)
