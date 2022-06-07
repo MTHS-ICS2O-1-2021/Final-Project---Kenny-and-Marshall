@@ -10,7 +10,7 @@
  * This class is the Splash Scene.
  */
 class SplashScene extends Phaser.Scene {
-    /**
+  /**
    * This method is the construtor.
    */
   constructor() {
@@ -28,10 +28,10 @@ class SplashScene extends Phaser.Scene {
    * This method is the preload.
    */
   preload() {
-    console.log('Splash Scene')
+    console.log("Splash Scene")
   }
 
-  create (data) {
+  create(data) {
     // pass
   }
 
