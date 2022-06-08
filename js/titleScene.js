@@ -7,7 +7,7 @@
 // This is the Title Scene
 
 /**
- * This class is the Splash Scene.
+ * This class is the Title Scene.
  */
 class TitleScene extends Phaser.Scene {
   /**
@@ -15,6 +15,8 @@ class TitleScene extends Phaser.Scene {
    */
   constructor() {
     super({ key: "titleScene" })
+
+    this.titleSceneBackgroundImage = null
   }
 
   /**
@@ -29,12 +31,16 @@ class TitleScene extends Phaser.Scene {
    */
   preload() {
     console.log("Title Scene")
+    this.load.image('titleSceneBackground', 'assets/fruit_screen_img.jpg')
   }
 
   /**
    * This method is the create.
    */
   create(data) {
+    this.titleSceneBackgroundImage = this.add.sprite(0, 0, 'titleSceneBackground')
+    this.titleSceneBackgroundImage.x = 1920 / 2
+    this.titleSceneBackgroundImage.y = 1080 / 2
     // pass
   }
 
