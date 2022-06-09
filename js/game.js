@@ -1,12 +1,11 @@
 /* global Phaser */
 
-// Copyright (c) 2022 Kenny and Marshall all rights reserved
+//Copyright (c) 2022 Kenny and Marshall all rights reserved
 //
 // Created by: Kenny Le and Marshall Demars
 // Created on: June 2022
 // This is the Phaser3 configuration file
 
-// scene import statements
 import SplashScene from "./splashScene.js"
 import TitleScene from "./titleScene.js"
 import MenuScene from "./menuScene.js"
