@@ -34,19 +34,18 @@ class GameScene extends Phaser.Scene {
     console.log("Game Scene")
 
     // images
-    this.load.image('sky-background', 'assets/starbackground.png')
-    this.load.image('basket', 'assets/basket.png')
-    
+    this.load.image("sky-background", "assets/starbackground.png")
+    this.load.image("basket", "assets/basket.png")
   }
 
   /**
    * This method is the create.
    */
   create(data) {
-    this.background = this.add.image(0, 0, 'sky-background').setScale(1.0)
+    this.background = this.add.image(0, 0, "sky-background").setScale(1.0)
     this.background.setOrigin(0, 0)
 
-    this.basket = this.physics.add.sprite(1920 / 2, 1080 - 100, 'basket')
+    this.basket = this.physics.add.sprite(1920 / 2, 1080 - 100, "basket")
   }
 
   /**
