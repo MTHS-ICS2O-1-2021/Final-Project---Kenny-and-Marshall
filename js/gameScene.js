@@ -34,8 +34,8 @@ class GameScene extends Phaser.Scene {
 
     // images
     this.load.image("skyBackground", "assets/sky-background.png")
-    this.load.image('basket', 'assets/basket.png')
-    this.load.image('apple', 'assets/apple.png')
+    this.load.image("basket", "assets/basket.png")
+    this.load.image("apple", "assets/apple.png")
   }
 
   /**
@@ -45,7 +45,9 @@ class GameScene extends Phaser.Scene {
     this.background = this.add.image(0, 0, "skyBackground").setScale(3.7)
     this.background.setOrigin(0, 0)
 
-    this.basket = this.physics.add.sprite(1920 / 2, 1080 - 100, 'basket').setScale(0.5)
+    this.basket = this.physics.add
+      .sprite(1920 / 2, 1080 - 100, "basket")
+      .setScale(0.5)
     // pass
   }
 
@@ -54,9 +56,9 @@ class GameScene extends Phaser.Scene {
    */
   update(time, delta) {
     // 60 times a second
-    
-    const keyLeftObj = this.input.keyboard.addKey('LEFT')
-    const keyRightObj = this.input.keyboard.addKey('RIGHT')
+
+    const keyLeftObj = this.input.keyboard.addKey("LEFT")
+    const keyRightObj = this.input.keyboard.addKey("RIGHT")
 
     if (keyLeftObj.isDown === true) {
       this.basket.x -= 25
