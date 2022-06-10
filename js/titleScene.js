@@ -53,7 +53,7 @@ class TitleScene extends Phaser.Scene {
     this.titleSceneBackgroundImage.y = 1080 / 2
 
     this.titleSceneText = this.add
-      .text(1920 / 2, 1080 / 2, "Space Aliens", this.titleSceneTextStyle)
+      .text(1920 / 2, 1080 / 2, "Fruit Catcher", this.titleSceneTextStyle)
       .setOrigin(0.5)
     // pass
   }
