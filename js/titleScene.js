@@ -17,6 +17,12 @@ class TitleScene extends Phaser.Scene {
     super({ key: "titleScene" })
 
     this.titleSceneBackgroundImage = null
+    this.titleSceneText = null
+    this.titleSceneTextStyle = {
+      font: "150px Times",
+      fill: "#000000",
+      align: "center",
+    }
   }
 
   /**
@@ -45,6 +51,10 @@ class TitleScene extends Phaser.Scene {
     )
     this.titleSceneBackgroundImage.x = 1920 / 2
     this.titleSceneBackgroundImage.y = 1080 / 2
+
+    this.titleSceneText = this.add
+      .text(1920 / 2, 1080 / 2, "Space Aliens", this.titleSceneTextStyle)
+      .setOrigin(0.5)
     // pass
   }
 
@@ -52,6 +62,9 @@ class TitleScene extends Phaser.Scene {
    * This method is the update.
    */
   update(time, delta) {
+    if (time > 6000) {
+      this.scene.switch("menuScene")
+    }
     // pass
   }
 }
