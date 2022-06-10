@@ -33,14 +33,14 @@ class GameScene extends Phaser.Scene {
     console.log("Game Scene")
 
     // images
-    this.load.image('skyBackground', 'assets/sky-background.png')
+    this.load.image("skyBackground", "assets/sky-background.png")
   }
 
   /**
    * This method is the create.
    */
   create(data) {
-    this.background = this.add.image(0, 0, 'skyBackground').setScale(3.5)
+    this.background = this.add.image(0, 0, "skyBackground").setScale(3.5)
     this.background.setOrigin(0, 0)
     // pass
   }
