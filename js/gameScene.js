@@ -10,7 +10,10 @@
  * This class is the Game Scene.
  */
 class GameScene extends Phaser.Scene {
-  // create an apple
+  
+  /**
+   * This creates an apple.
+   */
   createApple() {
     const appleXLocation = Math.floor(Math.random() * 1920) + 1
     let appleXVelocity = Math.floor(Math.random() * 50) + 1
@@ -23,7 +26,9 @@ class GameScene extends Phaser.Scene {
     this.appleGroup.add(anApple)
   }
 
-  // create a banana
+  /**
+   * This creates a banana.
+   */
   createBanana() {
     const bananaXLocation = Math.floor(Math.random() * 1920) + 1
     let bananaXVelocity = Math.floor(Math.random() * 50) + 1
@@ -36,7 +41,9 @@ class GameScene extends Phaser.Scene {
     this.bananaGroup.add(anBanana)
   }
 
-  // create a pineapple
+  /**
+   * This creates a pineapple.
+   */
   createPineapple() {
     const pineappleXLocation = Math.floor(Math.random() * 1920) + 1
     let pineappleXVelocity = Math.floor(Math.random() * 50) + 1
@@ -49,7 +56,9 @@ class GameScene extends Phaser.Scene {
     this.pineappleGroup.add(anPineapple)
   }
 
-  // create a spike
+  /**
+   * This creates a spike.
+   */
   createSpike() {
     const spikeXLocation = Math.floor(Math.random() * 1920) + 1
     let spikeXVelocity = Math.floor(Math.random() * 50) + 1
