@@ -18,9 +18,9 @@ class GameScene extends Phaser.Scene {
     let appleXVelocity = Math.floor(Math.random() * 50) + 1
     appleXVelocity *= Math.round(Math.random()) ? 1 : -1
     const anApple = this.physics.add
-      .sprite(appleXLocation, 100, "apple")
+      .sprite(appleXLocation, 0, "apple")
       .setScale(0.4)
-    anApple.body.velocity.y = 200
+    anApple.body.velocity.y = 300
     anApple.body.velocity.x = appleXVelocity
     this.appleGroup.add(anApple)
   }
@@ -33,9 +33,9 @@ class GameScene extends Phaser.Scene {
     let bananaXVelocity = Math.floor(Math.random() * 50) + 1
     bananaXVelocity *= Math.round(Math.random()) ? 1 : -1
     const anBanana = this.physics.add
-      .sprite(bananaXLocation, 100, "banana")
+      .sprite(bananaXLocation, 0, "banana")
       .setScale(0.3)
-    anBanana.body.velocity.y = 200
+    anBanana.body.velocity.y = 300
     anBanana.body.velocity.x = bananaXVelocity
     this.bananaGroup.add(anBanana)
   }
@@ -48,9 +48,9 @@ class GameScene extends Phaser.Scene {
     let pineappleXVelocity = Math.floor(Math.random() * 50) + 1
     pineappleXVelocity *= Math.round(Math.random()) ? 1 : -1
     const anPineapple = this.physics.add
-      .sprite(pineappleXLocation, 100, "pineapple")
+      .sprite(pineappleXLocation, 0, "pineapple")
       .setScale(0.3)
-    anPineapple.body.velocity.y = 700
+    anPineapple.body.velocity.y = 900
     anPineapple.body.velocity.x = pineappleXVelocity
     this.pineappleGroup.add(anPineapple)
   }
@@ -63,9 +63,9 @@ class GameScene extends Phaser.Scene {
     let spikeXVelocity = Math.floor(Math.random() * 50) + 1
     spikeXVelocity *= Math.round(Math.random()) ? 1 : -1
     const anSpike = this.physics.add
-      .sprite(spikeXLocation, 100, "spike")
+      .sprite(spikeXLocation, 0, "spike")
       .setScale(0.3)
-    anSpike.body.velocity.y = 200
+    anSpike.body.velocity.y = 350
     anSpike.body.velocity.x = spikeXVelocity
     this.spikeGroup.add(anSpike)
   }
@@ -77,6 +77,9 @@ class GameScene extends Phaser.Scene {
     super({ key: "gameScene" })
 
     this.background = null
+    this.score = 0
+    this.scoreText = null
+    this.scoreTextStyle = { font: '65px Arial', fill: '#000000', align: 'center'}
   }
 
   /**
@@ -99,6 +102,10 @@ class GameScene extends Phaser.Scene {
     this.load.image("banana", "assets/banana.png")
     this.load.image("pineapple", "assets/pineapple.png")
     this.load.image("spike", "assets/spikeball.png")
+
+    // sound
+    this.load.audio('collect', 'assets/popBasket.wav')
+    this.load.audio('terminated', 'assets/game-over.wav')
   }
 
   /**
@@ -107,6 +114,8 @@ class GameScene extends Phaser.Scene {
   create(data) {
     this.background = this.add.image(0, 0, "skyBackground").setScale(3.7)
     this.background.setOrigin(0, 0)
+
+    this.scoreText = this.add.text(10, 10, 'Score: ' + this.score.toString(), this.scoreTextStyle)
 
     this.basket = this.physics.add
       .sprite(1920 / 2, 1080 - 100, "basket")
@@ -127,14 +136,22 @@ class GameScene extends Phaser.Scene {
     // create a group for the spikes
     this.spikeGroup = this.add.group()
     this.createSpike()
+    this.createSpike()
+    this.createSpike()
+    this.createSpike()
 
     // Collisions between basket and apple
     this.physics.add.collider(
       this.basket,
       this.appleGroup,
       function (basketCollide, appleCollide) {
+        this.sound.play('collect')
+        this.score = this.score + 1
+        this.scoreText.setText('Score: ' + this.score.toString())
         appleCollide.destroy()
         this.createApple()
+        this.createApple()
+        basketCollide = basketCollide.body.velocity.y = 0
       }.bind(this)
     )
 
@@ -143,8 +160,13 @@ class GameScene extends Phaser.Scene {
       this.basket,
       this.bananaGroup,
       function (basketCollide, bananaCollide) {
+        this.sound.play('collect')
+        this.score = this.score + 1
+        this.scoreText.setText('Score: ' + this.score.toString())
         bananaCollide.destroy()
         this.createBanana()
+        this.createBanana()
+        basketCollide = basketCollide.body.velocity.y = 0
       }.bind(this)
     )
 
@@ -153,8 +175,12 @@ class GameScene extends Phaser.Scene {
       this.basket,
       this.pineappleGroup,
       function (basketCollide, pineappleCollide) {
+        this.sound.play('collect')
+        this.score = this.score + 5
+        this.scoreText.setText('Score: ' + this.score.toString())
         pineappleCollide.destroy()
         this.createPineapple()
+        basketCollide = basketCollide.body.velocity.y = 0
       }.bind(this)
     )
 
@@ -163,8 +189,12 @@ class GameScene extends Phaser.Scene {
       this.basket,
       this.spikeGroup,
       function (basketCollide, spikeCollide) {
+        this.sound.play('terminated')
+        this.score = 0
+        this.scoreText.setText('Score: ' + this.score.toString())
         spikeCollide.destroy()
         this.createSpike()
+        basketCollide = basketCollide.body.velocity.y = 0
       }.bind(this)
     )
 
@@ -193,7 +223,46 @@ class GameScene extends Phaser.Scene {
         this.basket.x = 0
       }
     }
-    // pass
+    
+    this.appleGroup.children.each(function (item) {
+      var randomNumber = 0
+      if (item.y > 1080) {
+        randomNumber =  Math.floor(Math.random() * 2) + 1
+        if (randomNumber == 2) {
+          item.x = Math.floor(Math.random() * 1920) + 1
+          item.y = -100
+        } else {
+          item.destroy()
+        }
+      }
+    })
+    
+    this.bananaGroup.children.each(function (item) {
+      var randomNumber = 0
+      if (item.y > 1080) {
+        randomNumber =  Math.floor(Math.random() * 2) + 1
+        if (randomNumber == 2) {
+          item.x = Math.floor(Math.random() * 1920) + 1
+          item.y = -100
+        } else {
+          item.destroy()
+        }
+      }
+    })
+    
+    this.pineappleGroup.children.each(function (item) {
+      if (item.y > 1080) {
+        item.x = Math.floor(Math.random() * 1920) + 1
+        item.y = -100
+      }
+    })
+    
+    this.spikeGroup.children.each(function (item) {
+      if (item.y > 1080) {
+        item.x = Math.floor(Math.random() * 1920) + 1
+        item.y = -100
+      }
+    })
   }
 }
 
