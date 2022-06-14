@@ -79,7 +79,11 @@ class GameScene extends Phaser.Scene {
     this.background = null
     this.score = 0
     this.scoreText = null
-    this.scoreTextStyle = { font: '65px Arial', fill: '#000000', align: 'center'}
+    this.scoreTextStyle = {
+      font: "65px Arial",
+      fill: "#000000",
+      align: "center",
+    }
   }
 
   /**
@@ -104,8 +108,8 @@ class GameScene extends Phaser.Scene {
     this.load.image("spike", "assets/spikeball.png")
 
     // sound
-    this.load.audio('collect', 'assets/popBasket.wav')
-    this.load.audio('terminated', 'assets/game-over.wav')
+    this.load.audio("collect", "assets/popBasket.wav")
+    this.load.audio("terminated", "assets/game-over.wav")
   }
 
   /**
@@ -115,7 +119,12 @@ class GameScene extends Phaser.Scene {
     this.background = this.add.image(0, 0, "skyBackground").setScale(3.7)
     this.background.setOrigin(0, 0)
 
-    this.scoreText = this.add.text(10, 10, 'Score: ' + this.score.toString(), this.scoreTextStyle)
+    this.scoreText = this.add.text(
+      10,
+      10,
+      "Score: " + this.score.toString(),
+      this.scoreTextStyle
+    )
 
     this.basket = this.physics.add
       .sprite(1920 / 2, 1080 - 100, "basket")
@@ -145,9 +154,9 @@ class GameScene extends Phaser.Scene {
       this.basket,
       this.appleGroup,
       function (basketCollide, appleCollide) {
-        this.sound.play('collect')
+        this.sound.play("collect")
         this.score = this.score + 1
-        this.scoreText.setText('Score: ' + this.score.toString())
+        this.scoreText.setText("Score: " + this.score.toString())
         appleCollide.destroy()
         this.createApple()
         this.createApple()
@@ -160,9 +169,9 @@ class GameScene extends Phaser.Scene {
       this.basket,
       this.bananaGroup,
       function (basketCollide, bananaCollide) {
-        this.sound.play('collect')
+        this.sound.play("collect")
         this.score = this.score + 1
-        this.scoreText.setText('Score: ' + this.score.toString())
+        this.scoreText.setText("Score: " + this.score.toString())
         bananaCollide.destroy()
         this.createBanana()
         this.createBanana()
@@ -175,9 +184,9 @@ class GameScene extends Phaser.Scene {
       this.basket,
       this.pineappleGroup,
       function (basketCollide, pineappleCollide) {
-        this.sound.play('collect')
+        this.sound.play("collect")
         this.score = this.score + 5
-        this.scoreText.setText('Score: ' + this.score.toString())
+        this.scoreText.setText("Score: " + this.score.toString())
         pineappleCollide.destroy()
         this.createPineapple()
         basketCollide = basketCollide.body.velocity.y = 0
@@ -189,9 +198,9 @@ class GameScene extends Phaser.Scene {
       this.basket,
       this.spikeGroup,
       function (basketCollide, spikeCollide) {
-        this.sound.play('terminated')
+        this.sound.play("terminated")
         this.score = 0
-        this.scoreText.setText('Score: ' + this.score.toString())
+        this.scoreText.setText("Score: " + this.score.toString())
         spikeCollide.destroy()
         this.createSpike()
         basketCollide = basketCollide.body.velocity.y = 0
@@ -223,11 +232,11 @@ class GameScene extends Phaser.Scene {
         this.basket.x = 0
       }
     }
-    
+
     this.appleGroup.children.each(function (item) {
       var randomNumber = 0
       if (item.y > 1080) {
-        randomNumber =  Math.floor(Math.random() * 2) + 1
+        randomNumber = Math.floor(Math.random() * 2) + 1
         if (randomNumber == 2) {
           item.x = Math.floor(Math.random() * 1920) + 1
           item.y = -100
@@ -236,11 +245,11 @@ class GameScene extends Phaser.Scene {
         }
       }
     })
-    
+
     this.bananaGroup.children.each(function (item) {
       var randomNumber = 0
       if (item.y > 1080) {
-        randomNumber =  Math.floor(Math.random() * 2) + 1
+        randomNumber = Math.floor(Math.random() * 2) + 1
         if (randomNumber == 2) {
           item.x = Math.floor(Math.random() * 1920) + 1
           item.y = -100
@@ -249,14 +258,14 @@ class GameScene extends Phaser.Scene {
         }
       }
     })
-    
+
     this.pineappleGroup.children.each(function (item) {
       if (item.y > 1080) {
         item.x = Math.floor(Math.random() * 1920) + 1
         item.y = -100
       }
     })
-    
+
     this.spikeGroup.children.each(function (item) {
       if (item.y > 1080) {
         item.x = Math.floor(Math.random() * 1920) + 1
