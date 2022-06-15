@@ -84,6 +84,13 @@ class GameScene extends Phaser.Scene {
       fill: "#000000",
       align: "center",
     }
+    
+    this.gameOverText = null
+    this.gameOverTextStyle = {
+      font: "65px Arial",
+      fill: "#000000",
+      align: "center",
+    }
   }
 
   /**
@@ -109,7 +116,8 @@ class GameScene extends Phaser.Scene {
 
     // sound
     this.load.audio("collect", "assets/popBasket.wav")
-    this.load.audio("terminated", "assets/game-over.wav")
+    this.load.audio("terminated", "assets/spikeSound.wav")
+    this.load.audio("game-over", "assets/game-over.wav")
   }
 
   /**
@@ -159,7 +167,7 @@ class GameScene extends Phaser.Scene {
         this.scoreText.setText("Score: " + this.score.toString())
         appleCollide.destroy()
         this.createApple()
-        this.createApple()
+        this.createBanana()
         basketCollide = basketCollide.body.velocity.y = 0
       }.bind(this)
     )
@@ -173,7 +181,7 @@ class GameScene extends Phaser.Scene {
         this.score = this.score + 1
         this.scoreText.setText("Score: " + this.score.toString())
         bananaCollide.destroy()
-        this.createBanana()
+        this.createApple()
         this.createBanana()
         basketCollide = basketCollide.body.velocity.y = 0
       }.bind(this)
@@ -185,7 +193,7 @@ class GameScene extends Phaser.Scene {
       this.pineappleGroup,
       function (basketCollide, pineappleCollide) {
         this.sound.play("collect")
-        this.score = this.score + 5
+        this.score = this.score + 3
         this.scoreText.setText("Score: " + this.score.toString())
         pineappleCollide.destroy()
         this.createPineapple()
@@ -202,10 +210,20 @@ class GameScene extends Phaser.Scene {
         this.score = 0
         this.scoreText.setText("Score: " + this.score.toString())
         spikeCollide.destroy()
-        this.createSpike()
         basketCollide = basketCollide.body.velocity.y = 0
       }.bind(this)
     )
+
+    // Collisions between basket and spike
+    this.physics.add.collider(this.basket, this.spikeGroup, function (basketCollide, spikeCollide) {
+      this.sound.play('game-over')
+      this.physics.pause()
+      spikeCollide.destroy()
+      basketCollide.destroy()
+      this.gameOverText = this.add.text(1920 / 2, 1080 / 2, 'Game Over! \nClick to play again.', this.gameOverTextStyle).setOrigin(0.5)
+      this.gameOverText.setInteractive({ useHandCursor: true })
+      this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
+    }.bind(this))
 
     // pass
   }
