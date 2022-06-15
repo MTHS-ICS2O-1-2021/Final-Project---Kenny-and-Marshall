@@ -84,7 +84,7 @@ class GameScene extends Phaser.Scene {
       fill: "#000000",
       align: "center",
     }
-    
+
     this.gameOverText = null
     this.gameOverTextStyle = {
       font: "65px Arial",
@@ -215,15 +215,26 @@ class GameScene extends Phaser.Scene {
     )
 
     // Collisions between basket and spike
-    this.physics.add.collider(this.basket, this.spikeGroup, function (basketCollide, spikeCollide) {
-      this.sound.play('game-over')
-      this.physics.pause()
-      spikeCollide.destroy()
-      basketCollide.destroy()
-      this.gameOverText = this.add.text(1920 / 2, 1080 / 2, 'Game Over! \nClick to play again.', this.gameOverTextStyle).setOrigin(0.5)
-      this.gameOverText.setInteractive({ useHandCursor: true })
-      this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'))
-    }.bind(this))
+    this.physics.add.collider(
+      this.basket,
+      this.spikeGroup,
+      function (basketCollide, spikeCollide) {
+        this.sound.play("game-over")
+        this.physics.pause()
+        spikeCollide.destroy()
+        basketCollide.destroy()
+        this.gameOverText = this.add
+          .text(
+            1920 / 2,
+            1080 / 2,
+            "Game Over! \nClick to play again.",
+            this.gameOverTextStyle
+          )
+          .setOrigin(0.5)
+        this.gameOverText.setInteractive({ useHandCursor: true })
+        this.gameOverText.on("pointerdown", () => this.scene.start("gameScene"))
+      }.bind(this)
+    )
 
     // pass
   }
