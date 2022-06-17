@@ -18,7 +18,7 @@ class GameScene extends Phaser.Scene {
     let appleXVelocity = Math.floor(Math.random() * 50) + 1
     appleXVelocity *= Math.round(Math.random()) ? 1 : -1
     const anApple = this.physics.add
-      .sprite(appleXLocation, 0, "apple")
+      .sprite(appleXLocation, -300, "apple")
       .setScale(0.4)
     anApple.body.velocity.y = 300
     anApple.body.velocity.x = appleXVelocity
@@ -33,7 +33,7 @@ class GameScene extends Phaser.Scene {
     let bananaXVelocity = Math.floor(Math.random() * 50) + 1
     bananaXVelocity *= Math.round(Math.random()) ? 1 : -1
     const anBanana = this.physics.add
-      .sprite(bananaXLocation, 0, "banana")
+      .sprite(bananaXLocation, -300, "banana")
       .setScale(0.3)
     anBanana.body.velocity.y = 300
     anBanana.body.velocity.x = bananaXVelocity
@@ -48,7 +48,7 @@ class GameScene extends Phaser.Scene {
     let pineappleXVelocity = Math.floor(Math.random() * 50) + 1
     pineappleXVelocity *= Math.round(Math.random()) ? 1 : -1
     const anPineapple = this.physics.add
-      .sprite(pineappleXLocation, 0, "pineapple")
+      .sprite(pineappleXLocation, -1500, "pineapple")
       .setScale(0.3)
     anPineapple.body.velocity.y = 900
     anPineapple.body.velocity.x = pineappleXVelocity
@@ -63,7 +63,7 @@ class GameScene extends Phaser.Scene {
     let spikeXVelocity = Math.floor(Math.random() * 50) + 1
     spikeXVelocity *= Math.round(Math.random()) ? 1 : -1
     const anSpike = this.physics.add
-      .sprite(spikeXLocation, 0, "spike")
+      .sprite(spikeXLocation, -400, "spike")
       .setScale(0.3)
     anSpike.body.velocity.y = 350
     anSpike.body.velocity.x = spikeXVelocity
@@ -168,7 +168,7 @@ class GameScene extends Phaser.Scene {
         appleCollide.destroy()
         this.createApple()
         this.createBanana()
-        basketCollide = basketCollide.body.velocity.y = 0
+        basketCollide = basketCollide.body.velocity.y = -2
       }.bind(this)
     )
 
@@ -183,7 +183,7 @@ class GameScene extends Phaser.Scene {
         bananaCollide.destroy()
         this.createApple()
         this.createBanana()
-        basketCollide = basketCollide.body.velocity.y = 0
+        basketCollide = basketCollide.body.velocity.y = -2
       }.bind(this)
     )
 
@@ -197,7 +197,7 @@ class GameScene extends Phaser.Scene {
         this.scoreText.setText("Score: " + this.score.toString())
         pineappleCollide.destroy()
         this.createPineapple()
-        basketCollide = basketCollide.body.velocity.y = 0
+        basketCollide = basketCollide.body.velocity.y = -2
       }.bind(this)
     )
 
@@ -209,20 +209,9 @@ class GameScene extends Phaser.Scene {
         this.sound.play("terminated")
         this.score = 0
         this.scoreText.setText("Score: " + this.score.toString())
-        spikeCollide.destroy()
-        basketCollide = basketCollide.body.velocity.y = 0
-      }.bind(this)
-    )
-
-    // Collisions between basket and spike
-    this.physics.add.collider(
-      this.basket,
-      this.spikeGroup,
-      function (basketCollide, spikeCollide) {
-        this.sound.play("game-over")
+        basketCollide = basketCollide.body.velocity.y = -2
         this.physics.pause()
         spikeCollide.destroy()
-        basketCollide.destroy()
         this.gameOverText = this.add
           .text(
             1920 / 2,
