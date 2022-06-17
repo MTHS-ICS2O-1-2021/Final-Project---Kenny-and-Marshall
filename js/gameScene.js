@@ -117,7 +117,7 @@ class GameScene extends Phaser.Scene {
     // sound
     this.load.audio("collect", "assets/popBasket.wav")
     this.load.audio("game-over", "assets/game-over.wav")
-    this.load.audio('gameScene-music', 'assets/gameSceneAux.wav')
+    this.load.audio("gameScene-music", "assets/gameSceneAux.wav")
   }
 
   /**
@@ -126,7 +126,7 @@ class GameScene extends Phaser.Scene {
   create(data) {
     this.background = this.add.image(0, 0, "skyBackground").setScale(3.7)
     this.background.setOrigin(0, 0)
-    this.sound.play("gameScene-music", {volume: 5})
+    this.sound.play("gameScene-music", { volume: 5 })
 
     this.scoreText = this.add.text(
       10,
@@ -156,7 +156,7 @@ class GameScene extends Phaser.Scene {
     this.createSpike()
     this.createSpike()
     this.createSpike()
-    this.createSpike()    
+    this.createSpike()
     this.createSpike()
 
     // Collisions between basket and apple
@@ -208,7 +208,7 @@ class GameScene extends Phaser.Scene {
       this.basket,
       this.spikeGroup,
       function (basketCollide, spikeCollide) {
-        this.sound.play("game-over", {volume: 5})
+        this.sound.play("game-over", { volume: 5 })
         this.score = 0
         this.scoreText.setText("Score: " + this.score.toString())
         basketCollide = basketCollide.body.velocity.y = -2
