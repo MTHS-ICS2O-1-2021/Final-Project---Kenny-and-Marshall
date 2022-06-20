@@ -31,7 +31,10 @@ class InstructionScene extends Phaser.Scene {
    */
   preload() {
     console.log("Instruction Scene")
-    this.load.image("instructionSceneBackground", "./assets/instructionSceneImage.png")
+    this.load.image(
+      "instructionSceneBackground",
+      "./assets/instructionSceneImage.png"
+    )
     this.load.image("returnButton", "assets/return.png")
   }
 
@@ -47,7 +50,11 @@ class InstructionScene extends Phaser.Scene {
     this.instructionSceneBackgroungImage.x = 1920 / 2
     this.instructionSceneBackgroungImage.y = 1080 / 2
 
-    this.returnButton = this.add.sprite(1920 / 4, 1080 / 4 + 100, "returnButton")
+    this.returnButton = this.add.sprite(
+      1920 / 4,
+      1080 / 4 + 100,
+      "returnButton"
+    )
     this.returnButton.setInteractive({ useHandCursor: true })
     this.returnButton.on("pointerdown", () => this.clickReturnButton())
     // pass
@@ -60,7 +67,7 @@ class InstructionScene extends Phaser.Scene {
     // pass
   }
 
-   /**
+  /**
    * This method is the menuScene button.
    */
   clickReturnButton() {
