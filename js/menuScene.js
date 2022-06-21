@@ -51,8 +51,8 @@ class MenuScene extends Phaser.Scene {
     this.startButton.on("pointerdown", () => this.clickButton())
 
     this.instructionsButton = this.add.sprite(
-      1920 / 3,
-      1080 / 3 + 100,
+      1920 / 2,
+      1400 / 2 + 100,
       "instructionsButton"
     )
     this.instructionsButton.setInteractive({ useHandCursor: true })

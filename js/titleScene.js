@@ -37,7 +37,7 @@ class TitleScene extends Phaser.Scene {
    */
   preload() {
     console.log("Title Scene")
-    this.load.image("titleSceneBackground", "assets/fruit_screen_img.jpg")
+    this.load.image("titleSceneBackground", "assets/titleSceneImage.jpg")
   }
 
   /**
@@ -48,7 +48,7 @@ class TitleScene extends Phaser.Scene {
       0,
       0,
       "titleSceneBackground"
-    )
+    ).setScale(2.3)
     this.titleSceneBackgroundImage.x = 1920 / 2
     this.titleSceneBackgroundImage.y = 1080 / 2
 
