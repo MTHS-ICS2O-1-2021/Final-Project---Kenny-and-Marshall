@@ -18,6 +18,7 @@ class MenuScene extends Phaser.Scene {
 
     this.menuSceneBackgroundImage = null
     this.startButton = null
+    this.instructionsButton = null
   }
 
   /**
@@ -34,6 +35,7 @@ class MenuScene extends Phaser.Scene {
     console.log("Menu Scene")
     this.load.image("menuSceneBackground", "assets/fruits_screen_image2.jpg")
     this.load.image("startButton", "assets/start.png")
+    this.load.image("instructionsButton", "assets/instructions.png")
   }
 
   /**
@@ -47,6 +49,16 @@ class MenuScene extends Phaser.Scene {
     this.startButton = this.add.sprite(1920 / 2, 1080 / 2 + 100, "startButton")
     this.startButton.setInteractive({ useHandCursor: true })
     this.startButton.on("pointerdown", () => this.clickButton())
+
+    this.instructionsButton = this.add.sprite(
+      1920 / 3,
+      1080 / 3 + 100,
+      "instructionsButton"
+    )
+    this.instructionsButton.setInteractive({ useHandCursor: true })
+    this.instructionsButton.on("pointerdown", () =>
+      this.clickInstructionsButton()
+    )
     // pass
   }
 
@@ -58,10 +70,18 @@ class MenuScene extends Phaser.Scene {
   }
 
   /**
-   * This method is the button.
+   * This method is the start button.
    */
   clickButton() {
     this.scene.start("gameScene")
+    // pass
+  }
+
+  /**
+   * This method is the instructions button.
+   */
+  clickInstructionsButton() {
+    this.scene.start("instructionScene")
     // pass
   }
 }
