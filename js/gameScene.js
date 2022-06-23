@@ -126,7 +126,7 @@ class GameScene extends Phaser.Scene {
   create(data) {
     this.background = this.add.image(0, 0, "skyBackground").setScale(3.7)
     this.background.setOrigin(0, 0)
-    this.sound.play("gameScene-music", { volume: 5 })
+    this.sound.play("gameScene-music", { volume: 3 })
 
     this.scoreText = this.add.text(
       10,
@@ -142,9 +142,11 @@ class GameScene extends Phaser.Scene {
     // create a group for the apples
     this.appleGroup = this.add.group()
     this.createApple()
+    this.createApple()
 
     // create a group for the bananas
     this.bananaGroup = this.add.group()
+    this.createBanana()
     this.createBanana()
 
     // create a group for the pineapples
