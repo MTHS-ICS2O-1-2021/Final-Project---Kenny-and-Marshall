@@ -142,9 +142,11 @@ class GameScene extends Phaser.Scene {
     // create a group for the apples
     this.appleGroup = this.add.group()
     this.createApple()
+    this.createApple()
 
     // create a group for the bananas
     this.bananaGroup = this.add.group()
+    this.createBanana()
     this.createBanana()
 
     // create a group for the pineapples
