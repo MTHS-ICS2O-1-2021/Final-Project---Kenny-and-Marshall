@@ -126,7 +126,7 @@ class GameScene extends Phaser.Scene {
   create(data) {
     this.background = this.add.image(0, 0, "skyBackground").setScale(3.7)
     this.background.setOrigin(0, 0)
-    this.sound.play("gameScene-music", { volume: 5 })
+    this.sound.play("gameScene-music", { volume: 3 })
 
     this.scoreText = this.add.text(
       10,
